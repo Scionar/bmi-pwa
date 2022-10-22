@@ -1,0 +1,10 @@
+html {
+    font-size: 62.5%; /* Set font size to 10px, when using rem */
+}
+
+body {
+    color: var(--foreground-color);
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 2rem; /* Use 16px font size, as a base font size */
+    line-height: 1.5;
+}

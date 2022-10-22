@@ -1,0 +1,28 @@
+.container {
+    border-radius: 0.5rem;
+}
+
+.row {
+    display: flex;
+    background-color: #FFF;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 0.2rem solid var(--root-background-color);
+}
+
+.rowText {
+    color: #000;
+    font-size: 2rem;
+}
+
+.topRow {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+.bottomRow {
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-bottom-width: 0;
+}

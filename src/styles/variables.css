@@ -1,0 +1,37 @@
+:root {
+    --foreground-color: #262626;
+    --root-background-color: #F2F2F7;
+  
+    --layout-max-width: 100%;
+    --layout-padding: 1rem;
+  }
+  
+  /* SM - 576 px */
+  @media screen and (min-width: 36em) {
+    :root {
+      --layout-max-width: 51rem;
+      --layout-padding: 0rem;
+    }
+  }
+  
+  /* MD - 768 px */
+  @media screen and (min-width: 48em) {
+    :root {
+      --layout-max-width: 70rem;
+    }
+  }
+  
+  /* LG - 992 px */
+  @media screen and (min-width: 62em) {
+    :root {
+      --layout-max-width: 92rem;
+    }
+  }
+  
+  /* XL - 1200 px */
+  @media screen and (min-width: 75em) {
+    :root {
+      --layout-max-width: 113rem;
+    }
+  }
+  
