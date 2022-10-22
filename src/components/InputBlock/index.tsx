@@ -19,6 +19,8 @@ const InputBlock = ({ name, value, handler, style }: InputBlockProps) => {
         onChange={(event) => handler(event)}
         maxLength={3}
         enterKeyHint="enter"
+        size={3}
+        inputMode="numeric"
       />
     </div>
   );
