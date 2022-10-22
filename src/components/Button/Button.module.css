@@ -2,10 +2,10 @@
 .container {
     background-color: var(--root-background-color);
     border-top: 1px solid #E5E5E9;
-    padding: 1rem 0;
+    padding: 1rem 0 3rem;
     position:-webkit-sticky;
     position:sticky;
-    bottom:0;
+    bottom: 0;
 }
 
 .button {
