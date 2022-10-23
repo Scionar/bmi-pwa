@@ -1,0 +1,23 @@
+.container {
+    background-color: var(--panel-color);
+    border-radius: 1rem;
+    display: flex;
+    overflow: hidden;
+}
+
+.option {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    border-radius: 1rem;
+    color: var(--toggle-text-color);
+    flex-grow: 1;
+    text-align: center;
+    padding: 1rem;
+}
+
+.selectedOption {
+    background-color: var(--toggle-selected-color);
+    color: var(--toggle-selected-text-color);
+}

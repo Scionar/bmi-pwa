@@ -5,6 +5,9 @@
   --panel-color: #ffffff;
   --button-primary-color: #007aff;
   --button-primary-active-color: #6cb3ff;
+  --toggle-text-color: #8e8e93;
+  --toggle-selected-color: #8e8e93;
+  --toggle-selected-text-color: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -15,5 +18,8 @@
     --panel-color: #3a3a3c;
     --button-primary-color: #007aff;
     --button-primary-active-color: #6cb3ff;
+    --toggle-text-color: #8e8e93;
+    --toggle-selected-color: #8e8e93;
+    --toggle-selected-text-color: #ffffff;
   }
 }
