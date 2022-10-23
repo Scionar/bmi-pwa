@@ -6,3 +6,14 @@
   --button-primary-color: #007aff;
   --button-primary-active-color: #6cb3ff;
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --root-background-color: #1c1c1e;
+    --default-text-color: #ffffff;
+    --input-block-name-color: #8e8e93;
+    --panel-color: #3a3a3c;
+    --button-primary-color: #007aff;
+    --button-primary-active-color: #6cb3ff;
+  }
+}
