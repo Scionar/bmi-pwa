@@ -19,7 +19,7 @@ const Toggle = ({ handler, style, options = [], selected }: ToggleProps) => {
       {options.map((item: Option) => {
         const classes = [styles.option];
         if (item.value === selected) classes.push(styles.selectedOption);
-        return <button className={classes.join(' ')} value={item.value} onClick={handler}>{item.name}</button>;
+        return <button key={item.value} className={classes.join(' ')} value={item.value} onClick={handler}>{item.name}</button>;
       })}
     </div>
   );
