@@ -34,6 +34,38 @@ function App() {
     return !Number.isNaN(parseFloat(value)) && parseFloat(value) !== 0;
   };
 
+  const isHeightDefined = () => {
+    if (unitSystem === "metric") return isDefined(height);
+    return isDefined(feet) && isDefined(inches);
+  };
+
+  const isHeightEmpty = () => {
+    if (unitSystem === "metric") return isEmpty(height);
+    return isEmpty(feet) && isEmpty(inches);
+  };
+
+  const getHeight = () => {
+    if (unitSystem === "metric") return Number(height);
+
+    const feetToMeters = Number(feet) / 3.2808;
+    const inchesToMeters = Number(inches) / 39.37;
+    const result = (feetToMeters + inchesToMeters) * 100;
+
+    return result;
+  };
+
+  const setComplexHeight = (result: string) => {
+    if (unitSystem === "metric") setHeight(result);
+
+    if (unitSystem === "imperial") {
+      const toAllInches = Number(result) / 2.54;
+      const toFeet = Math.floor(toAllInches / 12);
+      const remainingInches = toAllInches - toFeet * 12;
+      setFeet(toFeet.toFixed(0));
+      setInches(remainingInches.toFixed(0));
+    }
+  };
+
   const feetOnchangeHandler = (event: React.FormEvent<HTMLInputElement>) => {
     setFeet(event.currentTarget.value);
   };
@@ -56,22 +88,20 @@ function App() {
 
   const buttonOnClickHandler = () => {
     // Height
-    if (isDefined(bmi) && isDefined(weight) && isEmpty(height)) {
+    if (isDefined(bmi) && isDefined(weight) && isHeightEmpty()) {
       const result = (Math.sqrt(Number(weight) / Number(bmi)) * 100).toFixed(0);
-      setHeight(result);
+      setComplexHeight(result);
     }
 
     // Weight
-    if (isDefined(bmi) && isDefined(height) && isEmpty(weight)) {
-      const result = ((Number(bmi) * Number(height) ** 2) / 10000).toFixed(0);
+    if (isDefined(bmi) && isHeightDefined() && isEmpty(weight)) {
+      const result = ((Number(bmi) * getHeight() ** 2) / 10000).toFixed(0);
       setWeight(result);
     }
 
     // BMI
-    if (isDefined(height) && isDefined(weight) && isEmpty(bmi)) {
-      const result = ((Number(weight) / Number(height) ** 2) * 10000).toFixed(
-        0
-      );
+    if (isHeightDefined() && isDefined(weight) && isEmpty(bmi)) {
+      const result = ((Number(weight) / getHeight() ** 2) * 10000).toFixed(0);
       setBmi(result);
     }
   };
