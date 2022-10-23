@@ -19,6 +19,9 @@ const horizontalContainerStyle = {
 function App() {
   const [unitSystem, setUnitSystem] = useState("metric");
 
+  const [feet, setFeet] = useState("");
+  const [inches, setInches] = useState("");
+
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
   const [bmi, setBmi] = useState("");
@@ -29,6 +32,14 @@ function App() {
 
   const isDefined = (value: string) => {
     return !Number.isNaN(parseFloat(value)) && parseFloat(value) !== 0;
+  };
+
+  const feetOnchangeHandler = (event: React.FormEvent<HTMLInputElement>) => {
+    setFeet(event.currentTarget.value);
+  };
+
+  const inchesOnchangeHandler = (event: React.FormEvent<HTMLInputElement>) => {
+    setInches(event.currentTarget.value);
   };
 
   const heightOnchangeHandler = (event: React.FormEvent<HTMLInputElement>) => {
@@ -77,13 +88,35 @@ function App() {
 
   return (
     <AppContainer>
-      <Toggle options={unitSystemOptions} handler={unitSystemHandler} selected={unitSystem} />
-      <InputBlock
-        name="HEIGHT"
-        value={height}
-        handler={heightOnchangeHandler}
-        style={{ marginTop: "2rem" }}
+      <Toggle
+        options={unitSystemOptions}
+        handler={unitSystemHandler}
+        selected={unitSystem}
       />
+      {unitSystem === "metric" && (
+        <InputBlock
+          name="HEIGHT"
+          value={height}
+          handler={heightOnchangeHandler}
+          style={{ marginTop: "2rem" }}
+        />
+      )}
+      {unitSystem === "imperial" && (
+        <div style={horizontalContainerStyle}>
+          <InputBlock
+            name="FEET"
+            value={feet}
+            handler={feetOnchangeHandler}
+            style={{ marginRight: "10px", flexGrow: 1 }}
+          />
+          <InputBlock
+            name="INCHES"
+            value={inches}
+            handler={inchesOnchangeHandler}
+            style={{ marginLeft: "10px", flexGrow: 1 }}
+          />
+        </div>
+      )}
       <div style={horizontalContainerStyle}>
         <InputBlock
           name="WEIGHT"
