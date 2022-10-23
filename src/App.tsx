@@ -21,6 +21,7 @@ function App() {
 
   const [feet, setFeet] = useState("");
   const [inches, setInches] = useState("");
+  const [pounds, setPounds] = useState("");
 
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
@@ -66,12 +67,41 @@ function App() {
     }
   };
 
+  const isWeightDefined = () => {
+    if (unitSystem === "metric") return isDefined(weight);
+    return isDefined(pounds);
+  };
+
+  const isWeightEmpty = () => {
+    if (unitSystem === "metric") return isEmpty(weight);
+    return isEmpty(pounds);
+  };
+
+  const getWeight = () => {
+    if (unitSystem === "metric") return Number(weight);
+
+    return Number(pounds) / 2.2046;
+  };
+
+  const setComplexWeight = (result: string) => {
+    if (unitSystem === "metric") setWeight(result);
+
+    if (unitSystem === "imperial") {
+      const poundResult = Number(result) * 2.2046;
+      setPounds(poundResult.toFixed(0));
+    }
+  };
+
   const feetOnchangeHandler = (event: React.FormEvent<HTMLInputElement>) => {
     setFeet(event.currentTarget.value);
   };
 
   const inchesOnchangeHandler = (event: React.FormEvent<HTMLInputElement>) => {
     setInches(event.currentTarget.value);
+  };
+
+  const poundsOnchangeHandler = (event: React.FormEvent<HTMLInputElement>) => {
+    setPounds(event.currentTarget.value);
   };
 
   const heightOnchangeHandler = (event: React.FormEvent<HTMLInputElement>) => {
@@ -88,20 +118,20 @@ function App() {
 
   const buttonOnClickHandler = () => {
     // Height
-    if (isDefined(bmi) && isDefined(weight) && isHeightEmpty()) {
-      const result = (Math.sqrt(Number(weight) / Number(bmi)) * 100).toFixed(0);
+    if (isDefined(bmi) && isWeightDefined() && isHeightEmpty()) {
+      const result = (Math.sqrt(getWeight() / Number(bmi)) * 100).toFixed(0);
       setComplexHeight(result);
     }
 
     // Weight
-    if (isDefined(bmi) && isHeightDefined() && isEmpty(weight)) {
+    if (isDefined(bmi) && isHeightDefined() && isWeightEmpty()) {
       const result = ((Number(bmi) * getHeight() ** 2) / 10000).toFixed(0);
-      setWeight(result);
+      setComplexWeight(result);
     }
 
     // BMI
-    if (isHeightDefined() && isDefined(weight) && isEmpty(bmi)) {
-      const result = ((Number(weight) / getHeight() ** 2) * 10000).toFixed(0);
+    if (isHeightDefined() && isWeightDefined() && isEmpty(bmi)) {
+      const result = ((getWeight() / getHeight() ** 2) * 10000).toFixed(0);
       setBmi(result);
     }
   };
@@ -148,12 +178,22 @@ function App() {
         </div>
       )}
       <div style={horizontalContainerStyle}>
-        <InputBlock
-          name="WEIGHT"
-          value={weight}
-          handler={weightOnchangeHandler}
-          style={{ marginRight: "10px", flexGrow: 1 }}
-        />
+        {unitSystem === "metric" && (
+          <InputBlock
+            name="WEIGHT"
+            value={weight}
+            handler={weightOnchangeHandler}
+            style={{ marginRight: "10px", flexGrow: 1 }}
+          />
+        )}
+        {unitSystem === "imperial" && (
+          <InputBlock
+            name="POUNDS"
+            value={pounds}
+            handler={poundsOnchangeHandler}
+            style={{ marginRight: "10px", flexGrow: 1 }}
+          />
+        )}
         <InputBlock
           name="BMI"
           value={bmi}
