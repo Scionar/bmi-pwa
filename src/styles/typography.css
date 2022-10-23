@@ -4,7 +4,9 @@ html {
 
 body {
     color: var(--default-text-color);
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
     font-size: 2rem; /* Use 16px font size, as a base font size */
     line-height: 1.5;
 }

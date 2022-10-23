@@ -2,19 +2,3 @@ html,
 body {
     background-color: var(--root-background-color);
 }
-
-header,
-main,
-footer {
-    margin: 0 auto;
-}
-
-h1 {
-    font-family: Barlow Condensed,Helvetica,sans-serif;
-    font-size: 7rem;
-}
-
-h2 {
-    font-family: Barlow Condensed,Helvetica,sans-serif;
-    font-size: 6rem;
-}
