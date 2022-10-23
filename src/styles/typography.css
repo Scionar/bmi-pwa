@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    color: var(--foreground-color);
+    color: var(--default-text-color);
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 2rem; /* Use 16px font size, as a base font size */
     line-height: 1.5;

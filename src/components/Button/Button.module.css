@@ -12,7 +12,7 @@
     border: none;
     border-radius: 1rem;
     align-items: center;
-    background-color: #007AFF;
+    background-color: var(--button-primary-color);
     padding: 1.5rem;
     color: #FFF;
     font-size: 2rem;
@@ -20,5 +20,5 @@
 }
 
 .button:active {
-    background-color: #6cb3ff;
+    background-color: var(--button-primary-active-color);
 }

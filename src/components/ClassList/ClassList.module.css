@@ -4,7 +4,7 @@
 
 .row {
     display: flex;
-    background-color: #FFF;
+    background-color: var(--panel-color);
     flex-direction: row;
     justify-content: space-between;
     padding: 1rem;
@@ -12,7 +12,7 @@
 }
 
 .rowText {
-    color: #000;
+    color: var(--default-text-color);
     font-size: 2rem;
 }
 

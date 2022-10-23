@@ -6,7 +6,6 @@ body {
 header,
 main,
 footer {
-    background-color: rgba(red, 0.2);
     margin: 0 auto;
 }
 
