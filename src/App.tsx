@@ -81,8 +81,8 @@ function App() {
 
     if (unitSystem === "imperial") {
       const { feet: feetValue, inches: inchesValue } = transformMetersToInches(Number(result));
-      setFeet(feetValue.toFixed(0));
-      setInches(inchesValue.toFixed(0));
+      setFeet(feetValue.toFixed(1));
+      setInches(inchesValue.toFixed(1));
     }
   };
 
@@ -107,7 +107,7 @@ function App() {
 
     if (unitSystem === "imperial") {
       const poundResult = Number(result) * 2.2046;
-      setPounds(poundResult.toFixed(0));
+      setPounds(poundResult.toFixed(1));
     }
   };
 
@@ -138,19 +138,19 @@ function App() {
   const buttonOnClickHandler = () => {
     // Height
     if (isDefined(bmi) && isWeightDefined() && isHeightEmpty()) {
-      const result = (Math.sqrt(getWeight() / Number(bmi)) * 100).toFixed(0);
+      const result = (Math.sqrt(getWeight() / Number(bmi)) * 100).toFixed(1);
       setComplexHeight(result);
     }
 
     // Weight
     if (isDefined(bmi) && isHeightDefined() && isWeightEmpty()) {
-      const result = ((Number(bmi) * getHeight() ** 2) / 10000).toFixed(0);
+      const result = ((Number(bmi) * getHeight() ** 2) / 10000).toFixed(1);
       setComplexWeight(result);
     }
 
     // BMI
     if (isHeightDefined() && isWeightDefined() && isEmpty(bmi)) {
-      const result = ((getWeight() / getHeight() ** 2) * 10000).toFixed(0);
+      const result = ((getWeight() / getHeight() ** 2) * 10000).toFixed(1);
       setBmi(result);
     }
   };
@@ -167,13 +167,13 @@ function App() {
     if (isHeightDefined()) {
       if (unitSystem === "metric") {
         const { feet: feetValue, inches: inchesValue } = transformMetersToInches(Number(height));
-        setFeet(feetValue.toFixed(0));
-        setInches(inchesValue.toFixed(0));
+        setFeet(feetValue.toFixed(1));
+        setInches(inchesValue.toFixed(1));
       }
 
       if (unitSystem === "imperial") {
         const heightValue = transformInchestoMeters(Number(feet), Number(inches));
-        setHeight(heightValue.toFixed(0));
+        setHeight(heightValue.toFixed(1));
       }
     }
 
@@ -181,12 +181,12 @@ function App() {
     if (isWeightDefined()) {
       if (unitSystem === "metric") {
         const poundsValue = transformKilosToPounds(Number(weight))
-        setPounds(poundsValue.toFixed(0));
+        setPounds(poundsValue.toFixed(1));
       }
 
       if (unitSystem === "imperial") {
         const kiloValue = transformPoundsToKilos(Number(pounds));
-        setWeight(kiloValue.toFixed(0));
+        setWeight(kiloValue.toFixed(1));
       }
     }
 

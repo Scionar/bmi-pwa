@@ -17,10 +17,10 @@ const InputBlock = ({ name, value, handler, style }: InputBlockProps) => {
         className={styles.input}
         value={value}
         onChange={(event) => handler(event)}
-        maxLength={3}
+        maxLength={5}
         enterKeyHint="enter"
-        size={3}
-        inputMode="numeric"
+        size={5}
+        inputMode="decimal"
       />
     </div>
   );

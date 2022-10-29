@@ -6,8 +6,8 @@
     align-items: center;
     border-radius: 1rem;
     height: 15rem;
-    padding: 2rem;
-    flex-shrink: 1
+    padding: 2rem 1rem;
+    flex-shrink: 0;
 }
 
 .name {
@@ -22,7 +22,7 @@
     border: 0;
     color: var(--default-text-color);
     font-weight: 700;
-    font-size: 5rem;
+    font-size: 4rem;
     text-align: center;
     outline: none;
     padding: 0;
