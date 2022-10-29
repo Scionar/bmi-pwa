@@ -27,6 +27,10 @@ function App() {
   const [weight, setWeight] = useState("");
   const [bmi, setBmi] = useState("");
 
+  const toNumber = (value: string) => {
+    return Number(value.replace(',', '.'));
+  }
+
   const isEmpty = (value: string) => {
     return !parseFloat(value);
   };
@@ -71,16 +75,16 @@ function App() {
   }
 
   const getHeight = () => {
-    if (unitSystem === "metric") return Number(height);
+    if (unitSystem === "metric") return toNumber(height);
 
-    return transformInchestoMeters(Number(feet), Number(inches));
+    return transformInchestoMeters(toNumber(feet), toNumber(inches));
   };
 
   const setComplexHeight = (result: string) => {
     if (unitSystem === "metric") setHeight(result);
 
     if (unitSystem === "imperial") {
-      const { feet: feetValue, inches: inchesValue } = transformMetersToInches(Number(result));
+      const { feet: feetValue, inches: inchesValue } = transformMetersToInches(toNumber(result));
       setFeet(feetValue.toFixed(1));
       setInches(inchesValue.toFixed(1));
     }
@@ -97,16 +101,16 @@ function App() {
   };
 
   const getWeight = () => {
-    if (unitSystem === "metric") return Number(weight);
+    if (unitSystem === "metric") return toNumber(weight);
 
-    return Number(pounds) / 2.2046;
+    return toNumber(pounds) / 2.2046;
   };
 
   const setComplexWeight = (result: string) => {
     if (unitSystem === "metric") setWeight(result);
 
     if (unitSystem === "imperial") {
-      const poundResult = Number(result) * 2.2046;
+      const poundResult = toNumber(result) * 2.2046;
       setPounds(poundResult.toFixed(1));
     }
   };
@@ -138,13 +142,13 @@ function App() {
   const buttonOnClickHandler = () => {
     // Height
     if (isDefined(bmi) && isWeightDefined() && isHeightEmpty()) {
-      const result = (Math.sqrt(getWeight() / Number(bmi)) * 100).toFixed(1);
+      const result = (Math.sqrt(getWeight() / toNumber(bmi)) * 100).toFixed(1);
       setComplexHeight(result);
     }
 
     // Weight
     if (isDefined(bmi) && isHeightDefined() && isWeightEmpty()) {
-      const result = ((Number(bmi) * getHeight() ** 2) / 10000).toFixed(1);
+      const result = ((toNumber(bmi) * getHeight() ** 2) / 10000).toFixed(1);
       setComplexWeight(result);
     }
 
@@ -166,13 +170,13 @@ function App() {
     // Height
     if (isHeightDefined()) {
       if (unitSystem === "metric") {
-        const { feet: feetValue, inches: inchesValue } = transformMetersToInches(Number(height));
+        const { feet: feetValue, inches: inchesValue } = transformMetersToInches(toNumber(height));
         setFeet(feetValue.toFixed(1));
         setInches(inchesValue.toFixed(1));
       }
 
       if (unitSystem === "imperial") {
-        const heightValue = transformInchestoMeters(Number(feet), Number(inches));
+        const heightValue = transformInchestoMeters(toNumber(feet), toNumber(inches));
         setHeight(heightValue.toFixed(1));
       }
     }
@@ -180,12 +184,12 @@ function App() {
     // Weight
     if (isWeightDefined()) {
       if (unitSystem === "metric") {
-        const poundsValue = transformKilosToPounds(Number(weight))
+        const poundsValue = transformKilosToPounds(toNumber(weight))
         setPounds(poundsValue.toFixed(1));
       }
 
       if (unitSystem === "imperial") {
-        const kiloValue = transformPoundsToKilos(Number(pounds));
+        const kiloValue = transformPoundsToKilos(toNumber(pounds));
         setWeight(kiloValue.toFixed(1));
       }
     }
