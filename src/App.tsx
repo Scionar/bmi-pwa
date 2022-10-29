@@ -45,25 +45,44 @@ function App() {
     return isEmpty(feet) && isEmpty(inches);
   };
 
+  const transformInchestoMeters = (feetValue: number, inchesValue: number) => {
+    const feetToMeters = feetValue / 3.2808;
+    const inchesToMeters = inchesValue / 39.37;
+    return (feetToMeters + inchesToMeters) * 100;
+  }
+
+  const transformMetersToInches = (meterValue: number) => {
+    const meterToInches = meterValue / 2.54;
+    const metersToFeet = Math.floor(meterToInches / 12);
+    const remainingInches = meterToInches - metersToFeet * 12;
+
+    return {
+      feet: metersToFeet,
+      inches: remainingInches
+    }
+  }
+
+  const transformKilosToPounds = (weightValue: number) => {
+    return weightValue * 2.2046;
+  }
+
+  const transformPoundsToKilos = (poundsValue: number) => {
+    return poundsValue / 2.2046;
+  }
+
   const getHeight = () => {
     if (unitSystem === "metric") return Number(height);
 
-    const feetToMeters = Number(feet) / 3.2808;
-    const inchesToMeters = Number(inches) / 39.37;
-    const result = (feetToMeters + inchesToMeters) * 100;
-
-    return result;
+    return transformInchestoMeters(Number(feet), Number(inches));
   };
 
   const setComplexHeight = (result: string) => {
     if (unitSystem === "metric") setHeight(result);
 
     if (unitSystem === "imperial") {
-      const toAllInches = Number(result) / 2.54;
-      const toFeet = Math.floor(toAllInches / 12);
-      const remainingInches = toAllInches - toFeet * 12;
-      setFeet(toFeet.toFixed(0));
-      setInches(remainingInches.toFixed(0));
+      const { feet: feetValue, inches: inchesValue } = transformMetersToInches(Number(result));
+      setFeet(feetValue.toFixed(0));
+      setInches(inchesValue.toFixed(0));
     }
   };
 
@@ -143,6 +162,34 @@ function App() {
 
   const unitSystemHandler: MouseEventHandler<HTMLButtonElement> = (event) => {
     const target = event.target as HTMLButtonElement;
+
+    // Height
+    if (isHeightDefined()) {
+      if (unitSystem === "metric") {
+        const { feet: feetValue, inches: inchesValue } = transformMetersToInches(Number(height));
+        setFeet(feetValue.toFixed(0));
+        setInches(inchesValue.toFixed(0));
+      }
+
+      if (unitSystem === "imperial") {
+        const heightValue = transformInchestoMeters(Number(feet), Number(inches));
+        setHeight(heightValue.toFixed(0));
+      }
+    }
+
+    // Weight
+    if (isWeightDefined()) {
+      if (unitSystem === "metric") {
+        const poundsValue = transformKilosToPounds(Number(weight))
+        setPounds(poundsValue.toFixed(0));
+      }
+
+      if (unitSystem === "imperial") {
+        const kiloValue = transformPoundsToKilos(Number(pounds));
+        setWeight(kiloValue.toFixed(0));
+      }
+    }
+
     setUnitSystem(target.value);
   };
 
